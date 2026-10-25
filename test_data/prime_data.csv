@@ -1,0 +1,13 @@
+tc_id,number,expected
+TC-P-01,0,False
+TC-P-02,1,False
+TC-P-03,2,True
+TC-P-04,3,True
+TC-P-05,4,False
+TC-P-06,5,True
+TC-P-07,91,False
+TC-P-08,121,False
+TC-P-09,2999,True
+TC-P-10,7919,True
+TC-P-11,-1,ValueError
+TC-P-12,-19,ValueError

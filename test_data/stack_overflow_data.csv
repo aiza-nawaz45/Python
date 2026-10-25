@@ -1,0 +1,6 @@
+tc_id,limit,items,extra_item,expected
+TC-SO-01,1,1,2,StackOverflowError
+TC-SO-02,2,1 2,3,StackOverflowError
+TC-SO-03,2,1,2,OK
+TC-SO-04,3,1 2,3,OK
+TC-SO-05,0,,1,StackOverflowError
