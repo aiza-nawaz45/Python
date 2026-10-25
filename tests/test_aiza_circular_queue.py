@@ -17,6 +17,10 @@ import pytest
 from data_structures.queues.circular_queue import CircularQueue
 
 
+# Groups and execution order (see pytest.ini and docs/RUNNING_TESTS.md)
+pytestmark = [pytest.mark.regression, pytest.mark.queue, pytest.mark.order(40)]
+
+
 def make_queue(items=(), capacity=5):
     """Helper: create a CircularQueue with `capacity` and enqueue `items` in order."""
     queue = CircularQueue(capacity)
@@ -28,6 +32,8 @@ def make_queue(items=(), capacity=5):
 # ---------------------------------------------------------------------------
 # __init__  (8 test cases)
 # ---------------------------------------------------------------------------
+@pytest.mark.smoke
+@pytest.mark.order(7)
 def test_new_queue_is_empty():  # ECP: valid capacity
     queue = CircularQueue(5)
     assert len(queue) == 0
@@ -187,6 +193,8 @@ def test_first_returns_false_again_after_queue_is_emptied():  # ST
 # ---------------------------------------------------------------------------
 # enqueue  (10 test cases)
 # ---------------------------------------------------------------------------
+@pytest.mark.smoke
+@pytest.mark.order(8)
 def test_enqueue_returns_the_same_queue_for_chaining():  # ECP
     queue = CircularQueue(5)
     assert queue.enqueue("A") is queue
@@ -244,6 +252,8 @@ def test_enqueue_on_zero_capacity_queue_raises_exception():  # BVA: capacity 0
 # ---------------------------------------------------------------------------
 # dequeue  (10 test cases)
 # ---------------------------------------------------------------------------
+@pytest.mark.smoke
+@pytest.mark.order(9)
 def test_dequeue_returns_oldest_item():  # ECP: FIFO
     queue = make_queue(["A", "B"])
     assert queue.dequeue() == "A"

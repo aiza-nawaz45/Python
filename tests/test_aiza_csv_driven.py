@@ -22,6 +22,10 @@ from data_structures.stacks.stack import (
 )
 from maths.prime_check import is_prime
 
+# Groups and execution order (see pytest.ini and docs/RUNNING_TESTS.md)
+pytestmark = [pytest.mark.regression, pytest.mark.data_driven, pytest.mark.order(50)]
+
+
 DATA_DIR = Path(__file__).resolve().parent.parent / "test_data"
 
 

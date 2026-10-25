@@ -21,6 +21,10 @@ from data_structures.stacks.stack import (
 )
 
 
+# Groups and execution order (see pytest.ini and docs/RUNNING_TESTS.md)
+pytestmark = [pytest.mark.regression, pytest.mark.stack, pytest.mark.order(20)]
+
+
 def make_stack(items=(), limit=10):
     """Helper: create a Stack with `limit` and push `items` in order."""
     stack = Stack(limit)
@@ -32,6 +36,8 @@ def make_stack(items=(), limit=10):
 # ---------------------------------------------------------------------------
 # Stack.push  (10 tests)
 # ---------------------------------------------------------------------------
+@pytest.mark.smoke
+@pytest.mark.order(1)
 def test_push_adds_item_on_top():  # ECP: valid push on partial stack
     stack = make_stack()
     stack.push(10)
@@ -52,6 +58,8 @@ def test_push_accepts_different_types(value):
     assert stack.size() == 1
 
 
+@pytest.mark.smoke
+@pytest.mark.order(3)
 def test_push_on_full_stack_raises_overflow():  # BVA: size == limit
     stack = make_stack([1, 2], limit=2)
     with pytest.raises(StackOverflowError):
@@ -94,6 +102,8 @@ def test_overflow_error_is_not_a_regular_exception():  # EG: design quirk
 # ---------------------------------------------------------------------------
 # Stack.pop  (9 tests)
 # ---------------------------------------------------------------------------
+@pytest.mark.smoke
+@pytest.mark.order(2)
 def test_pop_returns_last_pushed_item():  # ECP: valid pop
     stack = make_stack([1, 2, 3])
     assert stack.pop() == 3
@@ -105,6 +115,8 @@ def test_pop_decreases_size_by_one():  # ECP
     assert stack.size() == 2
 
 
+@pytest.mark.smoke
+@pytest.mark.order(4)
 def test_pop_on_empty_stack_raises_underflow():  # BVA: size == 0
     with pytest.raises(StackUnderflowError):
         Stack().pop()

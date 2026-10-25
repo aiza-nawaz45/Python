@@ -15,6 +15,10 @@ import pytest
 from maths.prime_check import is_prime
 
 
+# Groups and execution order (see pytest.ini and docs/RUNNING_TESTS.md)
+pytestmark = [pytest.mark.regression, pytest.mark.prime, pytest.mark.order(30)]
+
+
 # ---------------------------------------------------------------------------
 # is_prime: return values for valid input (10 test cases)
 # ---------------------------------------------------------------------------
@@ -57,6 +61,8 @@ def test_non_integer_types_raise_value_error(value):  # ECP: invalid types / EG
         is_prime(value)
 
 
+@pytest.mark.smoke
+@pytest.mark.order(5)
 def test_error_message_is_meaningful():  # EG: message should explain the problem
     with pytest.raises(ValueError, match="only accepts positive integers"):
         is_prime(-4)
@@ -69,6 +75,8 @@ def test_bool_inputs_are_treated_as_integers_one_and_zero(flag):  # EG
     assert is_prime(flag) is False
 
 
+@pytest.mark.smoke
+@pytest.mark.order(6)
 def test_return_type_is_bool():  # ECP: output type
     assert isinstance(is_prime(7), bool)
     assert isinstance(is_prime(8), bool)
